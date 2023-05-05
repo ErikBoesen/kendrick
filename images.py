@@ -111,7 +111,7 @@ def get_source_url(message):
     :param message: data of message to extract URL from.
     :return: URL of image to use.
     """
-    image_attachments = [attachment for attachment in message.attachments if attachment["type"] == "image"]
+    image_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "image"]
     if len(image_attachments) > 0:
         # Get sent image
         return image_attachments[0]["url"]
