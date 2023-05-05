@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(0, 'vendor')
+
 import os
 import requests
 from PIL import Image, ExifTags
