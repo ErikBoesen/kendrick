@@ -112,10 +112,11 @@ def get_source_url(message, include_avatar=True):
     :param include_avatar: should we use the avatar? Sometimes this may be undesired if another default is desired.
     :return: URL of image to use.
     """
-    mention_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "mentions"]
-    if message.get("image_url") is not None:
+    image_attachments = [attachment for attachment in message.attachments if attachment["type"] == "image"]
+    if len(image_attachments) > 0:
         # Get sent image
-        return message["image_url"]
+        return image_attachments[0]["url"]
+    mention_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "mentions"]
     elif len(mention_attachments) > 0:
         return get_portrait(mention_attachments[0]["user_ids"][0], message["group_id"], message["token"])
     # If no image was sent, use sender's avatar
