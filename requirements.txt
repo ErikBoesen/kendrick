@@ -1,3 +1,4 @@
 requests
 urllib3<2
-Pillow>=9.5.0
+# Removed Pillow because we use an arn instead for Lambda compat
+#Pillow>=9.5.0
