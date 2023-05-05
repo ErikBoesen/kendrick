@@ -44,7 +44,7 @@ def response(self, query, message):
     background.paste(words, (0, 0), words)
 
     # Send finished image
-    return "", upload_pil_image(background, message.token)
+    return "", upload_pil_image(background, message["token"])
 
 
 def receive(event, context):
@@ -70,11 +70,12 @@ def process(message):
             return response(text, message)
 
 
-def send(text, bot_id):
+def send((text, image_url), bot_id):
     url = "https://api.groupme.com/v3/bots/post"
 
     message = {
         "bot_id": bot_id,
         "text": text,
+        "picture_url": image_url,
     }
     r = requests.post(url, json=message)
