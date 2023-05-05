@@ -120,4 +120,4 @@ def get_source_url(message, include_avatar=True):
         return get_portrait(mention_attachments[0]["user_ids"][0], message["group_id"], message["token"])
     # If no image was sent, use sender's avatar
     if include_avatar:
-        return message.avatar_url
+        return message["avatar_url"]

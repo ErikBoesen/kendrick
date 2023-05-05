@@ -49,6 +49,8 @@ def response(query, message):
 
 def receive(event, context):
     message = json.loads(event["body"])
+    print("Received message:")
+    print(message)
 
     bot_id = message["bot_id"]
     reply = process(message)
