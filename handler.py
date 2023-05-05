@@ -53,7 +53,7 @@ def receive(event, context):
     bot_id = message["bot_id"]
     response = process(message)
     if response:
-        send(response, bot_id)
+        send(*response, bot_id)
 
     return {
         "statusCode": 200,
@@ -66,11 +66,11 @@ def process(message):
     if message["sender_type"] != "bot":
         text = message["text"]
         if text.lower().startswith("damn"):
-            text = text.replace("damn", "", 1).replace("DAMN", "", 1)
+            text = text.replace("damn", "", 1).replace("DAMN", "", 1).strip()
             return response(text, message)
 
 
-def send((text, image_url), bot_id):
+def send(text, image_url, bot_id):
     url = "https://api.groupme.com/v3/bots/post"
 
     message = {
