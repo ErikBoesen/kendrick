@@ -113,7 +113,7 @@ def get_source_url(message, include_avatar=True):
     :return: URL of image to use.
     """
     mention_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "mentions"]
-    if message["image_url"] is not None:
+    if message.get("image_url") is not None:
         # Get sent image
         return message["image_url"]
     elif len(mention_attachments) > 0:
