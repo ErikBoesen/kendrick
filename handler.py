@@ -21,7 +21,7 @@ def transform_text(text):
 
 def response(query, message):
     query = transform_text(query)
-    source_url = get_source_url(message, include_avatar=False)
+    source_url = get_source_url(message)
     if source_url is None:
         background = Image.open("resources/damn.jpg")
     else:
