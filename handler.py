@@ -7,10 +7,10 @@ import random
 import json
 
 from PIL import Image, ImageDraw, ImageFont
-from images import transform, get_source_url, pil_from_url, resize, upload_pil_image
+from images import get_source_url, pil_from_url, resize, upload_pil_image
 
 
-def transform(self, text):
+def transform_text(text):
     if not text:
         return "DAMN."
     # Use mention if there's something in it
@@ -19,8 +19,8 @@ def transform(self, text):
         text = text.split("@")[1].split()[0]
     return text.strip(".").upper() + "."
 
-def response(self, query, message):
-    query = transform(query)
+def response(query, message):
+    query = transform_text(query)
     source_url = get_source_url(message, include_avatar=False)
     if source_url is None:
         background = Image.open("resources/damn.jpg")
@@ -51,9 +51,9 @@ def receive(event, context):
     message = json.loads(event["body"])
 
     bot_id = message["bot_id"]
-    response = process(message)
-    if response:
-        send(*response, bot_id)
+    reply = process(message)
+    if reply:
+        send(*reply, bot_id)
 
     return {
         "statusCode": 200,
