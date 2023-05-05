@@ -7,7 +7,7 @@ import random
 import json
 
 from PIL import Image, ImageDraw, ImageFont
-from .images import transform, get_source_url, pil_from_url, resize, upload_pil_image
+from images import transform, get_source_url, pil_from_url, resize, upload_pil_image
 
 
 def transform(self, text):
