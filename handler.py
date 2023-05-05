@@ -68,7 +68,7 @@ def process(message):
     if message["sender_type"] != "bot":
         text = message["text"]
         if text.lower().startswith("damn"):
-            text = text.replace("damn", "", 1).replace("DAMN", "", 1).strip()
+            text = text.lower().replace("damn", "", 1).strip()
             return response(text, message)
 
 
