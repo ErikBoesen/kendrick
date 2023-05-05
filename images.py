@@ -104,12 +104,11 @@ def get_portrait(user_id, group_id, token):
         if member["user_id"] == user_id:
             return member["image_url"]
 
-def get_source_url(message, include_avatar=True):
+def get_source_url(message):
     """
-    Given complete image data, extract the URL of the best image to use for a command.
+    Given complete message data, extract the URL of the best image to use for a command.
     First choose attached image, then use mentioned person's avatar, then sender's avatar.
     :param message: data of message to extract URL from.
-    :param include_avatar: should we use the avatar? Sometimes this may be undesired if another default is desired.
     :return: URL of image to use.
     """
     image_attachments = [attachment for attachment in message.attachments if attachment["type"] == "image"]
@@ -117,8 +116,7 @@ def get_source_url(message, include_avatar=True):
         # Get sent image
         return image_attachments[0]["url"]
     mention_attachments = [attachment for attachment in message["attachments"] if attachment["type"] == "mentions"]
-    elif len(mention_attachments) > 0:
+    if len(mention_attachments) > 0:
         return get_portrait(mention_attachments[0]["user_ids"][0], message["group_id"], message["token"])
     # If no image was sent, use sender's avatar
-    if include_avatar:
-        return message["avatar_url"]
+    return message["avatar_url"]
